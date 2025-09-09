@@ -1,4 +1,4 @@
-package Strings.Algorithms.coding;
+package Arrays.Algorithms.coding;
 
 import java.util.HashSet;
 import java.util.List;
@@ -54,6 +54,52 @@ public class Arrays {
                 }
         }
         return seqIndex == sequence.size();
+    }
+
+    public static int[] sortedSquaredArray(int[] array) {
+        final int[] squared = new int[array.length];
+        for(int i= 0; i < array.length; i++){
+            int element = array[i];
+            squared[i] = element * element;
+        }
+        java.util.Arrays.sort(squared);//o(nlogn)
+        return squared;
+    }
+
+    public static int[] sortedSquaredArrayOpt(int[] array) {
+        final int[] squared = new int[array.length];
+        int left = 0;
+        int right = array.length - 1;
+        int arrIndex = array.length - 1;
+        while(left <= right && arrIndex >= 0){
+            int leftSquared = array[left] * array[left];
+            int rightSquared = array[right] * array[right];
+            if(leftSquared > rightSquared){
+                squared[arrIndex] = leftSquared;
+                left++;
+            }
+            else {
+                squared[arrIndex] = rightSquared;
+                right--;
+            }
+            arrIndex--;
+        }
+
+        return squared;
+    }
+
+    public int[][] transposeMatrix(int[][] matrix) {
+        final int[][]transposed = new int[matrix[0].length][matrix.length];
+        for(int row = 0; row < matrix[0].length; row++){
+            for(int col = 0; col < matrix.length; col++){
+                transposed[row][col] = matrix[col][row];
+            }
+        }
+        return transposed;
+    }
+
+    public List<Integer> threeNumberSum(int[]array, int sum){
+        final List<Integer>
     }
 }
 
