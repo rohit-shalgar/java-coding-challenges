@@ -2,6 +2,7 @@ package Arrays.Algorithms.coding;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Arrays {
@@ -98,8 +99,35 @@ public class Arrays {
         return transposed;
     }
 
-    public List<Integer> threeNumberSum(int[]array, int sum){
+    /*public List<Integer> threeNumberSum(int[]array, int sum){
         final List<Integer>
+    }*/
+
+    public int firstDuplicateValue(int[] array) {
+        HashSet<Integer> seen = new HashSet<>();
+        for(int i :array){
+            if(seen.contains(i)){
+                return i;
+            }
+            seen.add(i);
+        }
+        return -1;
+    }
+
+    public int firstDuplicateValueBrute(int[] array) {
+        int minDuplicateIndex = array.length;
+        for(int i = 0; i < array.length; i++){
+            int first = array[i];
+            for(int j = 0; j < array.length; j++){
+                if(i!= j && first == array[j]){
+                    minDuplicateIndex = Math.min(minDuplicateIndex,j);
+                }
+            }
+        }
+        if(minDuplicateIndex == array.length){
+            return -1;
+        }
+        return array[minDuplicateIndex];
     }
 }
 
