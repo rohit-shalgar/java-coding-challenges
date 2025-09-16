@@ -2,3 +2,13 @@ First Duplicate Value
     need to understand Q better
     use of set and index to get first duplicate
     need to check abs value solution with o(1) space
+
+Overlappin intervals
+    logic was correct but still lacking execution
+    use list to add items even if its int[]
+    its ok to check with first one and also try to get the q bteer - video
+    solution was to have one element outside and update it and its ends to get the range
+    In Java, when you modify an array through a reference, any other reference to that array sees the change.
+    int[] currentInterval = sortedIntervals[0];
+    mergedIntervals.add(currentInterval);
+    so when I do add and currentInterval changes, list array also changes as its reference

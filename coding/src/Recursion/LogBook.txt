@@ -1,0 +1,14 @@
+Permutations
+    Backtrack to avoid unexpected results
+    be careful with conditions
+    but overall looking good, time and space complexity needs to be studied more
+
+PowerSet
+    need to careful with for loop , concurrent mod exception
+    and the length, otherwise infinite loop
+
+BlackJack probability
+    got messed up on float
+    also the 4 difference logic was an issue
+    be careful with adding the card drawn
+    better logic is to be expected

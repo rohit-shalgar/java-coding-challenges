@@ -1,9 +1,6 @@
 package Arrays.Algorithms.coding;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Arrays {
     public static int[] twoNumberSum(int[]array , int sum){
@@ -128,6 +125,29 @@ public class Arrays {
             return -1;
         }
         return array[minDuplicateIndex];
+    }
+
+    public int[][] mergeOverlappingIntervals(int[][] intervals) {
+       List<int[]> mergedIntervals = new ArrayList<>();
+       int[][] sortedIntervals = intervals.clone();
+        java.util.Arrays.sort(sortedIntervals,(a,b)->Integer.compare(
+                a[0],b[0]
+        ));
+        int[] currentInterval = sortedIntervals[0];
+        mergedIntervals.add(currentInterval);
+        for(int[] nextInterval : sortedIntervals){
+            int currentIntervalEnd = currentInterval[1];
+            int nextIntervalStart = nextInterval[0];
+            int nextIntervalEnd = nextInterval[1];
+            if(currentIntervalEnd >= nextIntervalStart){
+                currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
+            }
+            else{
+                currentInterval = nextInterval;
+                mergedIntervals.add(currentInterval);
+            }
+        }
+        return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
     }
 }
 
