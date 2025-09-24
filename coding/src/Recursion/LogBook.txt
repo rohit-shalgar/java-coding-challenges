@@ -12,3 +12,12 @@ BlackJack probability
     also the 4 difference logic was an issue
     be careful with adding the card drawn
     better logic is to be expected
+
+DFS - Island perimeter
+    when started to iterate found issue quick so be aware
+    DFS rules:
+        find dfs root - island , land with value 1
+        then do dfs, have edge cases
+        and mark as visited by marking it - 1 and then return 0 from them.
+        also, variable - pass by value, create a new variable in dfs method
+        track and return it.

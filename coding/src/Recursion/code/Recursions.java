@@ -135,5 +135,109 @@ public class Recursions {
         return probability;
     }
 
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int targetedColor = image[sr][sc];
+        if(targetedColor != color){
+            dfs(image, sr, sc, color, targetedColor);
+        }
+        return image;
+    }
 
+    public void dfs(int[][] image, int sr, int sc, int color, int targetedColor){
+        if(image[sr][sc] == targetedColor){
+            image[sr][sc] = color;
+            if(sr > 0){
+                dfs(image, sr - 1, sc, color, targetedColor);
+            }
+            if(sr < image.length  - 1){
+                dfs(image, sr + 1, sc, color, targetedColor);
+            }
+            if(sc > 0){
+                dfs(image, sr , sc - 1, color, targetedColor);
+            }
+            if(sc < image[0].length  - 1){
+                dfs(image, sr, sc + 1, color, targetedColor);
+            }
+        }
+    }
+
+    public int islandPerimeter(int[][] grid) {
+        int perimiter = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        for(int r = 0; r < row; r++){
+            for(int c = 0; c < col ; c++){
+                if(grid[r][c] == 1){
+                    perimiter += 4;
+                    if(r > 0 && grid[r-1][c] == 1){
+                        perimiter -= 2;
+                    }
+                    if(c > 0 && grid[r][c - 1] == 1){
+                        perimiter -= 2;
+                    }
+                }
+            }
+        }
+        return perimiter;
+    }
+
+    public int islandPerimeterOpt(int[][] grid) {
+        for(int row = 0; row < grid.length; row++){
+            for(int col = 0; col < grid[0].length; col++){
+                if(grid[row][col] == 1){
+                    return dfs(grid, row, col);
+                }
+            }
+        }
+        return 0;
+    }
+
+    public int dfs(int[][]grid, int row, int col){
+        int per = 0;
+        if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length){
+            return 1;
+        }
+        if(grid[row][col] == 0){
+            return 1;
+        }
+        if(grid[row][col] == -1){
+            return 0;
+        }
+        grid[row][col] = -1;
+        per += dfs(grid, row + 1, col);
+        per += dfs(grid, row - 1, col);
+        per += dfs(grid, row, col + 1);
+        per += dfs(grid, row, col - 1);
+        return per;
+    }
+
+    public int maxAreaOfIsland(int[][] grid) {
+        int maxIslandArea = 0;
+        for(int row = 0; row < grid.length;row++){
+            for(int col = 0; col < grid[0].length; col++){
+                if(grid[row][col] == 1){
+                    int currentIslandArea = dfsAreaIsland(grid, row, col);
+                    maxIslandArea = Math.max(maxIslandArea, currentIslandArea);
+                }
+            }
+        }
+        return maxIslandArea;
+    }
+
+    private int dfsAreaIsland(int[][]grid, int row, int col){
+        int area = 0;
+        if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length){
+            return 0;
+        }
+        if(grid[row][col] == 0){
+            return 0;
+        }
+        area += 1;
+        grid[row][col] = 0;
+        area += dfsAreaIsland(grid, row + 1, col);
+        area += dfsAreaIsland(grid, row - 1, col);
+        area += dfsAreaIsland(grid, row, col + 1);
+        area += dfsAreaIsland(grid, row, col - 1);
+        return area;
+    }
 }
