@@ -1,9 +1,6 @@
 package Recursion.code;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Recursions {
     public static int productSum(List<Object> array) {
@@ -240,4 +237,76 @@ public class Recursions {
         area += dfsAreaIsland(grid, row, col - 1);
         return area;
     }
+
+    public String[][] revealMinesweeper(String[][] board, int row, int column) {
+        if(board[row][column].equals("M")){
+            board[row][column] = "X";
+            return board;
+        }
+        HashMap<CellKey,Boolean> isVisited = new HashMap<>();
+        dfsMineSweeper(board,row, column,isVisited);
+        return board;
+    }
+
+    private void dfsMineSweeper(String[][] board, int row, int column, HashMap<CellKey, Boolean> isVisited) {
+        if(row < 0 || row >= board.length || column < 0 || column >= board[0].length){
+            return;
+        }
+        CellKey key = new CellKey(row, column);
+        if(isVisited.containsKey(key) && isVisited.get(key).equals(true)){
+            return;
+        }
+        isVisited.put(key, true);
+        int adj = countAdjusantMines(board,row,column);
+        board[row][column] = String.valueOf(adj);
+        if(adj == 0){
+            dfsMineSweeper(board, row + 1, column, isVisited);
+            dfsMineSweeper(board, row - 1, column, isVisited);
+            dfsMineSweeper(board, row, column + 1, isVisited);
+            dfsMineSweeper(board, row, column - 1, isVisited);
+            dfsMineSweeper(board, row - 1, column + 1, isVisited);
+            dfsMineSweeper(board, row - 1, column - 1, isVisited);
+            dfsMineSweeper(board, row + 1, column + 1, isVisited);
+            dfsMineSweeper(board, row + 1, column - 1, isVisited);
+        }
+    }
+
+    private int countAdjusantMines(String[][] board, int row, int column) {
+        int count = 0;
+        for(int dr = -1 ; dr <= 1; dr++){
+            for(int dc = -1 ; dc <= 1; dc++){
+                int currentRow = row + dr;
+                int currentCol = column + dc;
+                if(currentRow >= 0 && currentRow < board.length && currentCol >= 0 && currentCol < board[0].length ){
+                    if(board[currentRow][currentCol].equals("M")){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    class CellKey {
+        private final int row;
+        private final int col;
+
+        public CellKey(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof CellKey key)) return false;
+            return row == key.row && col == key.col;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(row, col);
+        }
+    }
+
 }

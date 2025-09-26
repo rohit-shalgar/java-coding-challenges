@@ -21,3 +21,18 @@ DFS - Island perimeter
         and mark as visited by marking it - 1 and then return 0 from them.
         also, variable - pass by value, create a new variable in dfs method
         track and return it.
+
+Max area Island
+    was able to calculate briliantly using island as DFS root
+    needed to be careful with copy paste and kept calling with row +1
+
+Minesweper
+    tried solving with memoize and marking board as V
+    Never touch original board when you have to return it,
+    maybe clone and use it if area is asked
+    also, for 0 case could not resolve DFS
+    later had to calculate adjusant mines if its 0 then DFS
+    Also had to create a class with row and column and mark visited
+    memoize was useless as each adjusant was updated anyway
+    try it again
+    
