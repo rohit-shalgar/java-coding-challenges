@@ -149,5 +149,33 @@ public class Arrays {
         }
         return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
     }
+
+    public int bestSeat(int[] seats) {
+        int bestSeat = 0;
+        int zeroCount = 0;
+        int idx = 1;
+        while(idx < seats.length - 1){
+            if(seats[idx] == 0){
+                int currentZeroCount = 0;
+                currentZeroCount++;
+                int left = idx - 1;
+                while(left > 0 && seats[left] == 0){
+                    left--;
+                    currentZeroCount++;
+                }
+                int right = idx + 1;
+                while(right < seats.length - 1 && seats[right] == 0){
+                    right++;
+                    currentZeroCount++;
+                }
+                if(currentZeroCount > zeroCount){
+                    bestSeat = (left + right) / 2;
+                }
+                idx = right;
+            }
+            else idx++;
+        }
+        return bestSeat == 0 ? -1 : bestSeat;
+    }
 }
 

@@ -1,0 +1,10 @@
+RelativeRanks
+    Understand q first well
+    solve first the try to optimize
+    heaps does complicate as you need index in output and its rank of all
+    Heaps are more for top k , min k , ordering , scheduling etc
+    also, heaps - priority queues work with collection
+    int[] better sort
+
+
+
