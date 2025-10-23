@@ -6,5 +6,11 @@ RelativeRanks
     also, heaps - priority queues work with collection
     int[] better sort
 
+Top K elements subsequence
+    technique - min heap and offer
+    only storing k elements so that time and space complexity - log k
+    offer(), poll()
+    for operations where indexes are imp as well, store into int array
+    or Map.entry and sort the keys
 
 

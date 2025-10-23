@@ -12,3 +12,15 @@ Overlappin intervals
     int[] currentInterval = sortedIntervals[0];
     mergedIntervals.add(currentInterval);
     so when I do add and currentInterval changes, list array also changes as its reference
+
+
+Best Seat
+   tried to write logic for empty seat
+   logic should have been space between first occupied seat and last occupied seat
+   thought was right execution was wrong.
+
+Zero sum subarray
+    Brute force always works to give quick solution
+    instead of storing indexes, new technique can we store sum in some set?
+    also, sorting does not work in subarray probs as indexes need to be maintained
+    and that complicates things.

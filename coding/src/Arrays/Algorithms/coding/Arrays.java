@@ -151,31 +151,48 @@ public class Arrays {
     }
 
     public int bestSeat(int[] seats) {
-        int bestSeat = 0;
-        int zeroCount = 0;
-        int idx = 1;
-        while(idx < seats.length - 1){
-            if(seats[idx] == 0){
-                int currentZeroCount = 0;
-                currentZeroCount++;
-                int left = idx - 1;
-                while(left > 0 && seats[left] == 0){
-                    left--;
-                    currentZeroCount++;
-                }
-                int right = idx + 1;
-                while(right < seats.length - 1 && seats[right] == 0){
-                    right++;
-                    currentZeroCount++;
-                }
-                if(currentZeroCount > zeroCount){
-                    bestSeat = (left + right) / 2;
-                }
-                idx = right;
+       int maxSpace = 0;
+       int bestSeat = -1;
+       int leftIdx = 0;
+       while(leftIdx < seats.length){
+           int rightIdx = leftIdx + 1;
+           while(rightIdx < seats.length && seats[rightIdx] == 0){
+               rightIdx++;
+           }
+           int currentAvalSpace = rightIdx - leftIdx - 1;
+           if(currentAvalSpace > maxSpace){
+               bestSeat = (leftIdx + rightIdx) / 2;
+               maxSpace = currentAvalSpace;
+           }
+           leftIdx = rightIdx;
+       }
+       return bestSeat;
+    }
+
+    public boolean zeroSumSubarray(int[] nums) {
+        for(int i = 0; i < nums.length;i++){
+            int sum = nums[i];
+            if(sum == 0)return true;
+            for(int j = i + 1; j < nums.length; j++){
+                sum += nums[j];
+                if(sum == 0)return true;
             }
-            else idx++;
         }
-        return bestSeat == 0 ? -1 : bestSeat;
+        return false;
+    }
+
+    public boolean zeroSumSubarrayOpt(int[] nums) {
+        HashSet<Integer>sum = new HashSet<>();
+        int currentSum = 0;
+        sum.add(currentSum);
+        for(int i = 0; i < nums.length;i++){
+           currentSum += nums[i];
+           if(sum.contains(currentSum)){
+               return true;
+           }
+           sum.add(currentSum);
+        }
+        return false;
     }
 }
 
