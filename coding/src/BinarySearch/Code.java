@@ -22,36 +22,47 @@ public class Code {
         return new int[] {startIdx, endIdx};
     }
 
+    /*
+    {
+      "array": [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73],
+      "target": 45
+    }
+     */
     public static int[] searchForRangeOpt(int[] array, int target) {
-        int startIdx = -1;
-        int endIdx = -1;
-        int left = 0, right = array.length - 1;
+        int[] range = new int[]{-1,-1};
+        range[0] = modifiedBinarySearch(array,target,0,array.length - 1,true);
+        range[1] = modifiedBinarySearch(array,target,0,array.length - 1, false);
+        return range;
+    }
+
+    private static int modifiedBinarySearch(int[] array, int target, int left,int right, boolean goLeft) {
         while(left <= right){
-            int mid = (left + right ) / 2;
-            int potentialMatch = array[mid];
-            if(potentialMatch == target){
-                startIdx = mid;
-                endIdx = mid;
-                int newStartIdx = mid - 1;
-                while(newStartIdx >= 0 && array[newStartIdx] == target){
-                    newStartIdx--;
-                }
-                startIdx = Math.min(newStartIdx + 1, startIdx);
-                int newEndIdx = mid + 1;
-                while(newEndIdx < array.length && array[newEndIdx] == target){
-                    newEndIdx++;
-                }
-                endIdx = Math.max(newEndIdx - 1, endIdx);
-                break;
-            } else if (target < potentialMatch) {
+            int mid = (left + right) / 2;
+            if(array[mid] > target){
                 right = mid - 1;
-            }
-            else {
+            } else if (array[mid] < target) {
                 left = mid + 1;
+            }else {
+                if(goLeft){
+                    if(mid == 0 || array[mid - 1] != target){
+                        return mid;
+                    }else {
+                        right = mid - 1;
+                    }
+                }else {
+                    if(mid == array.length - 1 || ((mid + 1 <= array.length - 1) &&
+                        array[mid + 1] != target)){
+                        return mid;
+                    }
+                    else {
+                        left = mid + 1;
+                    }
+                }
             }
         }
-        return new int[] {startIdx, endIdx};
+        return -1;
     }
+
 
     public static int shiftedBinarySearch(int[] array, int target) {
         int left1 = 0, right1 = 0, left2 = 0, right2 = array.length;

@@ -6,3 +6,13 @@ Find 3 largest nums (algoexpert)
 
 Sorted matrix
     if its sorted see if you can come from back and reduce column or row based on values
+
+Find range
+    a boolean flag can be used to go left or right
+    binary search is all about moving left or right w.r.t. mid index all the time
+    in the range question - 1 behind or 1 after is not equal to the current one
+    means out of range
+    remember that
+    so learned 2 techniques - boolean flag to traverse a direction
+    and one before or one after is not equal or extreme ends are reached
+    e.g 0 or length , means we are done with the range.
