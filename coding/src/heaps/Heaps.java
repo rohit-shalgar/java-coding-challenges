@@ -20,6 +20,23 @@ import java.util.*;
  */
 public class Heaps {
 
+    public static int[] findThreeLargestNumbers(int[] array) {
+        // Write your code here.
+        int k = 3;
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for(int i : array){
+            minHeap.offer(i);
+            if(minHeap.size() > 3){
+                minHeap.poll();
+            }
+        }
+        int[] theLargestNumbers = new int[k];
+        for(int i = 0; i < k ; i++){
+            theLargestNumbers[i] = minHeap.poll();
+        }
+        return theLargestNumbers;
+    }
+
     // similiar to topK devs but done in o(n) time and o(n) space using bucket sort
     public int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer,Integer>topKFrequentCompute =

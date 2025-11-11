@@ -1,0 +1,8 @@
+Find 3 largest nums (algoexpert)
+    learned a new shifting techinque based on indexes
+    if index is same assign otherwise one before is equal to one next
+    learned min heap execution well now
+    always check if Number is greater before updating.
+
+Sorted matrix
+    if its sorted see if you can come from back and reduce column or row based on values
